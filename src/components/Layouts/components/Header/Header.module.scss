@@ -87,6 +87,10 @@
     color: rgba(22, 24, 35, 0.34);
     font-size: 1.8rem;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
         cursor: pointer;
         background-color: rgba(22, 24, 35, 0.03);
@@ -114,11 +118,30 @@
 }
 
 .action-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+
     font-size: 2.2rem;
-    padding: 4px 5px;
+    padding: 4px 7px;
     background-color: transparent;
     color: rgb(22, 24, 35);
     cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+
+    height: 2rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 2rem;
+    padding: 0 2px;
+    background-color: var(--primary);
+    color: var(--white);
+    border-radius: 50%;
 }
 
 .user-avatar {
