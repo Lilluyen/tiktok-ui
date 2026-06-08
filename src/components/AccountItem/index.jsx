@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './AccountItem.module.scss';
+import Image from '@/components/Image';
 
 const cx = classNames.bind(styles);
 function AccountItem() {
     return (
         <div className={cx('wrapper')}>
-            <img
+            <Image
                 src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="Hoaa"
                 className={cx('avatar')}
