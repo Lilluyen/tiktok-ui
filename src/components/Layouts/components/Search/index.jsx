@@ -15,14 +15,22 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showSearchResult, setShowSearchResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResults([1, 2, 3]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setSearchResults([]);
+            return;
+        }
+        fetch(`http://localhost:9999/users`)
+            .then((res) => res.json())
+            .then((res) => setSearchResults(res));
+
+        setLoading(true);
+    }, [searchValue]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
@@ -62,13 +70,14 @@ function Search() {
                     onChange={handleChange}
                     onFocus={() => setShowSearchResult(true)}
                 />
-                {searchValue && (
+                {searchValue && !loading && (
                     <button className={cx('clear-btn')} onClick={handleClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
 
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
+
                 <button className={cx('search-btn')}>
                     <SearchIcon />
                 </button>
