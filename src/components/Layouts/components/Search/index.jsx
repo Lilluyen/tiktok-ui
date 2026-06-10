@@ -9,6 +9,7 @@ import { Wrapper as PopperWrapper } from '@/components/Popper';
 import { SearchIcon } from '@/components/Icons';
 import styles from './Search.module.scss';
 import { useDebounce } from '@/hooks';
+import * as searchServices from '@/services/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -21,31 +22,25 @@ function Search() {
     const inputRef = useRef();
 
     const debounce = useDebounce(searchValue, 800);
-    console.log(debounce);
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounce.trim()) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setSearchResults([]);
             return;
         }
 
-        setLoading(true);
+        const fetchApi = async () => {
+            setLoading(true);
 
-        const params = new URLSearchParams({
-            'full_name:contains': searchValue,
-            _page: 1,
-            _per_page: 5,
-        });
+            const result = await searchServices.search(debounce);
+            setSearchResults(result);
 
-        fetch(`http://localhost:9999/users?${params.toString()}`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResults(res.data);
-                setLoading(false);
-            })
-            .catch(() => setLoading(false));
-    }, [searchValue]);
+            setLoading(false);
+        };
+
+        fetchApi();
+    }, [debounce]);
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
