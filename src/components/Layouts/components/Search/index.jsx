@@ -25,11 +25,22 @@ function Search() {
             setSearchResults([]);
             return;
         }
-        fetch(`http://localhost:9999/users`)
-            .then((res) => res.json())
-            .then((res) => setSearchResults(res));
 
         setLoading(true);
+
+        const params = new URLSearchParams({
+            'full_name:contains': searchValue,
+            _page: 1,
+            _per_page: 5,
+        });
+
+        fetch(`http://localhost:9999/users?${params.toString()}`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResults(res.data);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
     }, [searchValue]);
 
     const handleChange = (e) => {
@@ -51,10 +62,9 @@ function Search() {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h4 className={cx('search-title')}>Accounts</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResults.map((user) => (
+                            <AccountItem key={user.id} data={user} />
+                        ))}
                     </PopperWrapper>
                 </div>
             )}
