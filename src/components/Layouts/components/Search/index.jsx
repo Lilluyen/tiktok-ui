@@ -8,6 +8,7 @@ import AccountItem from '@/components/AccountItem';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
 import { SearchIcon } from '@/components/Icons';
 import styles from './Search.module.scss';
+import { useDebounce } from '@/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -18,6 +19,9 @@ function Search() {
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
+
+    const debounce = useDebounce(searchValue, 800);
+    console.log(debounce);
 
     useEffect(() => {
         if (!searchValue.trim()) {
