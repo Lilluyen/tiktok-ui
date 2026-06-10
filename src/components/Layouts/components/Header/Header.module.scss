@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.logo {
+    display: flex;
+}
+
 // actions
 
 .actions {
@@ -54,6 +58,7 @@
 
     height: 2rem;
     font-size: 1.4rem;
+    font-family: var(--font-family);
     font-weight: 600;
     line-height: 2rem;
     padding: 0 2px;

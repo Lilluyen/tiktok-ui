@@ -7,7 +7,7 @@ import MenuItem from './MenuItem';
 import { useState } from 'react';
 import Header from './Header';
 const cx = classNames.bind(styles);
-function Menu({ children, items = [] }) {
+function Menu({ children, items = [], hideOnClick = false }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
     const renderMenu = () => {
@@ -33,6 +33,7 @@ function Menu({ children, items = [] }) {
             delay={[0, 700]}
             offset={[12, 8]}
             placement="bottom-end"
+            hideOnClick={hideOnClick}
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
                     <PopperWrapper className={cx('menu-popper')}>
