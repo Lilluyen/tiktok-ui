@@ -1,8 +1,7 @@
 import axios from "axios";
 
-
 const httpRequest = axios.create({
-    baseURL: 'http://localhost:9999/'
+    baseURL: import.meta.env.VITE_BASE_URL,
 })
 
 export const get = async (path, option = {}) => {
