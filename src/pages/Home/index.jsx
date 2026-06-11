@@ -1,5 +1,13 @@
 const Home = () => {
-  return <h2>Home Page</h2>;
+    return (
+        <h2
+            style={{
+                height: '2000px',
+            }}
+        >
+            Home Page
+        </h2>
+    );
 };
 
 export default Home;

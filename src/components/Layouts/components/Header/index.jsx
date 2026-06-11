@@ -117,7 +117,7 @@ const Header = () => {
                     )}
                     <Menu items={currentUser ? USER_MENU : MENU_ITEMS}>
                         {currentUser ? (
-                            <Image className={cx('user-avatar')} alt="Nguyen Van A" src="fsfs" />
+                            <Image className={cx('user-avatar')} alt="Nguyen Van A" src="f" />
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical} />
